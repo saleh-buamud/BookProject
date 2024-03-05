@@ -36,21 +36,7 @@
         @yield('show')
         @yield('create')
         @yield('edit')
-        @if (Session::has('message'))
-            <script>
-                swal("message", "{{ Session::get('message') }}", 'warning', {
-                    button: true,
-                    button: "OK",
-                    dangerMode: true,
-                });
-                // No Button
-                swal("mess", "{{ Session::get('message') }}", 'success', {
-                    buttons: false,
-                    dangerMode: true,
-                    timer: 2000,
-                });
-            </script>
-        @endif
+    
 
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"

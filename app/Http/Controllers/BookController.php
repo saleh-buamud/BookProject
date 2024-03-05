@@ -43,7 +43,7 @@ Book::create([
     'title'=>request()->title,
     'author'=>request()->author,
 ]);
-     return redirect()->route('book.index')->with('message','Insert Book '); ;
+     return redirect()->route('book.index')->with('message','add','Insert Book '); ;
 
     }
            public function edit($id ){
@@ -55,15 +55,21 @@ Book::create([
 
     public function update($id){
 
-  $data = request()->all();
+  $title = request()->title;
+    $author = request()->author;
+    $newBook = Book::FindOrFail($id);
+    $newBook->title = $title;
+    $newBook->author = $author;
+    $newBook->save();
 
   return redirect()->route('book.show',$id); ;
 
 
     }
         public function destroy($id){
-  $data = request()->all();
-  return redirect()->route('book.index')->with('message','DELETE  BOOK ?  '); ;
+  $book = Book::findOrFail($id);
+  $book->delete();
+  return redirect()->route('book.index')->with('message','delete','delete  BOOK ?  '); ;
 
 
     }
