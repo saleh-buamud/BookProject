@@ -6,6 +6,15 @@
     <div>
         <form action="{{ route('book.store') }}" method="post">
             <div>
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                 @csrf
                 <div class="mb-3">
                     <label for="exampleFormControlInput1" class="form-label">title</label>

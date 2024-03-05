@@ -3,11 +3,21 @@
     index
 @endsection
 @section('index')
-    <div class="text-center mt-2">
-        <a href="{{ route('book.create') }}" class="btn btn-success">Cteate Book</a>
+    <div class="text-center mt-4">
+        <form action="search" method="GET">
+            @csrf
+            <input class="form-control" name="search" type="text" style="width: 600px;display:inline-block;"
+                placeholder="search" required>
+            <span class="input-group-append">
+                <button class="btn btn-dark" type="submit">
+                    Search
+                </button>
+        </form>
+        <br>
+        <a href="{{ route('book.create') }}" class="btn btn-success mt-4">Cteate Book</a>
     </div>
 
-    <table class="table">
+    <table class="table mt-4" style="width: 1300px; Margin:auto; padding:20px;">
         <thead>
             <tr>
                 <th scope="col">#</th>
@@ -40,9 +50,9 @@
 
                                 if (messageType === 'add') {
                                     swal("Success", messageText, 'success', {
-                                        button: true,
-                                        button: "OK",
+                                        buttons: false,
                                         dangerMode: true,
+                                        timer: 2000,
                                     });
                                 } else if (messageType === 'delete') {
                                     swal("Warning", messageText, 'warning', {
@@ -53,6 +63,7 @@
                                 }
                             </script>
                         @endif
+
 
 
                 </tr>

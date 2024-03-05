@@ -37,13 +37,17 @@ class BookController extends Controller
 //    $newBook->title = request()->title;
 //   $newBook->author = request()->author;
 //   $newBook->save();
-
+   $request->validate([
+        'title' => ['required','max:255'],
+        'author' => ['required',  'min:3','alpha'],
+    ]);
 //type 2
 Book::create([
     'title'=>request()->title,
     'author'=>request()->author,
 ]);
-     return redirect()->route('book.index')->with('message','Insert Book '); ;
+     return redirect()->route('book.index')->with('message_type', 'add')
+                ->with('message', 'تم إضافة كتاب');
 
     }
            public function edit($id ){
@@ -67,10 +71,19 @@ Book::create([
 
     }
         public function destroy($id){
-  $book = Book::findOrFail($id);
-  $book->delete();
-  return redirect()->route('book.index')->with('message','delete  BOOK ?  '); ;
+//   $book = Book::findOrFail($id);
+//   $book->delete();
+  Book::where('id',$id)->delete();
+  return redirect()->route('book.index')->with('message_type', 'delete')
+                ->with('message', 'delete Book');
 
 
     }
+       public function Search(Request $request){
+
+            $data = request()->search;
+           $books = Book::where('title', 'LIKE', '%' . $data . '%')->get();
+
+            return view('index',compact('books'));
+       }
 }
