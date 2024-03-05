@@ -43,7 +43,7 @@ Book::create([
     'title'=>request()->title,
     'author'=>request()->author,
 ]);
-     return redirect()->route('book.index')->with('message','add','Insert Book '); ;
+     return redirect()->route('book.index')->with('message','Insert Book '); ;
 
     }
            public function edit($id ){
@@ -69,7 +69,7 @@ Book::create([
         public function destroy($id){
   $book = Book::findOrFail($id);
   $book->delete();
-  return redirect()->route('book.index')->with('message','delete','delete  BOOK ?  '); ;
+  return redirect()->route('book.index')->with('message','delete  BOOK ?  '); ;
 
 
     }
